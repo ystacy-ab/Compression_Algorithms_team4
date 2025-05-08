@@ -27,6 +27,19 @@ def check_lossless(original_path, decompressed_path):
     """summary"""
     with open(original_path, 'rb') as f1, open(decompressed_path, 'rb') as f2:
         return f1.read() == f2.read()
+def save_compressed_file(data, algorithm, original_filename):
+    """Saves the compressed data to a file"""
+    compressed_filename = f"{original_filename}_{algorithm}_compressed.bin"
+    with open(compressed_filename, "wb") as f:
+        pickle.dump(data, f)
+    return compressed_filename
+
+def save_decompressed_file(data, algorithm, original_filename):
+    """Saves the decompressed data to a file"""
+    decompressed_filename = f"{original_filename}_{algorithm}_decompressed.bin"
+    with open(decompressed_filename, "wb") as f:
+        f.write(data)
+    return decompressed_filename
 
 def main():
     """main"""
@@ -35,6 +48,7 @@ def main():
     parser.add_argument("algorithm", choices=["huffman", "deflate", "lzw", "lz77"], \
                     help="Compression algorithm to use")
     args = parser.parse_args()
+    original_filename = os.path.splitext(os.path.basename(args.filepath))[0]
 
     original_size = get_file_size(args.filepath)
     data = readfile(args.filepath)
@@ -55,23 +69,16 @@ def main():
 
     elif args.algorithm == "lzw":
         compressed_data = lzw_compress(data)
-        with tempfile.NamedTemporaryFile(delete=False) as f:
-            pickle.dump(compressed_data, f)
-            compressed_path = f.name
+        compressed_path = save_compressed_file(compressed_data, 'lzw', original_filename)
         decompressed_data = lzw_decompress(compressed_data)
-        with tempfile.NamedTemporaryFile(delete=False) as f:
-            f.write(decompressed_data)
-            decompressed_path = f.name
+        decompressed_path = save_decompressed_file(decompressed_data, 'lzw', original_filename)
 
     elif args.algorithm == "lz77":
         compressed_data = lz77_compress(data)
-        with tempfile.NamedTemporaryFile(delete=False) as f:
-            pickle.dump(compressed_data, f)
-            compressed_path = f.name
+        compressed_path = save_compressed_file(compressed_data, 'lz77', original_filename)
         decompressed_data = lz77_decompress(compressed_data)
-        with tempfile.NamedTemporaryFile(delete=False) as f:
-            f.write(decompressed_data)
-            decompressed_path = f.name
+        decompressed_path = save_decompressed_file(decompressed_data, 'lz77', original_filename)
+
 
     else:
         print('Invalid algorithm')
