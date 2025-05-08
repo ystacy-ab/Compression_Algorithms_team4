@@ -134,8 +134,6 @@ def deflate_bit_compress(filename: str, data: bool = False) -> bytes | tuple[byt
     final_data = header_size + codes_serialized + compressed_bytes
 
     end = datetime.now()
-    print("Original size:", len(info), "bytes")
-    print("Compressed size:", len(final_data), "bytes")
     if data:
         return final_data, {
             'Original size': len(info),
