@@ -24,7 +24,7 @@ Cтворення власної програми-кодека.
 - Побудова графіків ефективності.
 
 ## Структура проєкту
-project/
+`project/
 ├── codec.py
 ├── algorithms/
 │ ├── huffman.py
@@ -47,12 +47,12 @@ project/
 │ ├── compressed/
 │ └── decompressed/
 ├── requirements.txt
-└── README.md
+└── README.md`
 
 ## Запуск
 Програма працює через командний рядок з використанням аргументів. Приклад запуску:
 
-python3 main_argparse.py hello.txt deflate
+`python3 main_argparse.py hello.txt deflate`
 
 ## Команда
 - Лизенко Діана: реалізація LZ77, тестування відео файлів
