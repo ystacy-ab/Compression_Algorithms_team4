@@ -61,14 +61,7 @@ def build_codes(root: Node) -> dict:
                 stack.append((node.right, code + "1"))
     return codes
 
-
 def compress_file(filepath: str) -> str:
-    """Compresses a file using Huffman coding and saves the result to a .huff file.
-        Parameters:
-        filepath – Path to the file to compress.
-        Returns:
-        The path to the created compressed .huff file.
-    """
     with open(filepath, "rb") as f:
         data = f.read()
 
@@ -82,11 +75,10 @@ def compress_file(filepath: str) -> str:
     byte_array = bytearray(int(padded_bits[i:i+8], 2) for i in range(0, len(padded_bits), 8))
 
     file_name = os.path.basename(filepath)
-    output_path = os.path.splitext(filepath)[0] + ".huff"
+    output_path = os.path.splitext(filepath)[0] + "_huffman_compressed.bin"
 
     with open(output_path, "wb") as out:
         pickle.dump((byte_array, codes, len(encoded_bits), file_name), out)
-
 
     return output_path
 
@@ -101,7 +93,7 @@ def decompress_file(filepath: str) -> str:
         byte_array, codes, bit_length, original_filename = pickle.load(f)
 
         _, file_ext = os.path.splitext(original_filename)
-        output_path = os.path.splitext(filepath)[0] + "_decompressed" + file_ext
+        output_path = os.path.splitext(filepath)[0] + "_huffman_compressed.bin"
     reversed_codes = {v: k for k, v in codes.items()}
     bit_string = ''.join(f"{byte:08b}" for byte in byte_array)
     bit_string = bit_string[:bit_length]
