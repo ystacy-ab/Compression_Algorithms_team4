@@ -49,6 +49,7 @@ def main():
                     help="Compression algorithm to use")
     args = parser.parse_args()
     original_filename = os.path.splitext(os.path.basename(args.filepath))[0]
+    original_extension = os.path.splitext(args.filepath)[1]  # Отримуємо розширення оригінального файлу
 
     original_size = get_file_size(args.filepath)
     data = readfile(args.filepath)
@@ -71,14 +72,13 @@ def main():
         compressed_data = lzw_compress(data)
         compressed_path = save_compressed_file(compressed_data, 'lzw', original_filename)
         decompressed_data = lzw_decompress(compressed_data)
-        decompressed_path = save_decompressed_file(decompressed_data, 'lzw', original_filename)
+        decompressed_path = save_decompressed_file(decompressed_data, 'lzw', original_filename, original_extension)
 
     elif args.algorithm == "lz77":
         compressed_data = lz77_compress(data)
         compressed_path = save_compressed_file(compressed_data, 'lz77', original_filename)
         decompressed_data = lz77_decompress(compressed_data)
-        decompressed_path = save_decompressed_file(decompressed_data, 'lz77', original_filename)
-
+        decompressed_path = save_decompressed_file(decompressed_data, 'lz77', original_filename, original_extension)
 
     else:
         print('Invalid algorithm')
