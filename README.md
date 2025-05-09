@@ -25,27 +25,27 @@ Cтворення власної програми-кодека.
 
 ## Структура проєкту
 <pre> project/
-├── codec.py
 ├── algorithms/
 │ ├── huffman.py
 │ ├── lzw.py
 │ ├── lz77.py
 │ └── deflate.py
-├── handlers/
-│ ├── text_utils.py
-│ ├── image_utils.py
-│ ├── audio_utils.py
-│ └── video_utils.py
-├── common/ # Утиліти
-│ ├── file_io.py
-│ └── stats.py
-├── tests/
-│ ├── sample.txt
-│ ├── sample.wav
-│ └── sample.mp4
-├── results/
-│ ├── compressed/
-│ └── decompressed/
+├── static/
+│ ├── audio1.mp3
+│ ├── audio1.wav
+│ ├── audio2.mp3
+│ ├── img1.bmp
+│ ├── img1.jpg
+│ ├── img1.png
+│ ├── img1.tiff
+│ ├── txt1.txt
+│ ├── txt2.txt
+│ ├── txt3.txt
+│ ├── video1.mp4
+│ └── video2.mp4
+├── main_argparse.py
+├── mini_ui.py
+├── latex_report.pdf
 ├── requirements.txt
 └── README.md` </pre>
 
