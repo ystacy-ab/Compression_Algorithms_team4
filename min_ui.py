@@ -282,7 +282,7 @@ class FileConverterApp(ctk.CTk):
 
         self.headline_label = ctk.CTkLabel(
             self.headline_frame,
-            text="Next level of ⚡ compression\nand # conversion technology",
+            text="Next level of compression and decompression",
             text_color="#FFFFFF",
             font=ctk.CTkFont(size=24, weight="bold"),
             justify="center"
